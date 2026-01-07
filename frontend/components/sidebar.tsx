@@ -1,5 +1,8 @@
+"use client"
+
 import { Briefcase, MessageSquare, FileText, User, Settings, CreditCard, Globe } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
 import type { ComponentType, SVGProps } from "react"
 
 interface SidebarLinkProps{
@@ -25,19 +28,9 @@ function SidebarLink({icon, label, active}: SidebarLinkProps) {
   )
 }
 
-export function Sidebar() {
-  const navItems = [
-    { icon: Briefcase, label: "Jobs", active: true },
-    { icon: MessageSquare, label: "AI Mock Interview", active: false },
-    { icon: FileText, label: "Resume", active: false },
-    { icon: User, label: "Profile", active: false },
-    { icon: Settings, label: "Setting", active: false },
-    { icon: CreditCard, label: "Subscription", active: false },
-    { icon: Globe, label: "Extra Credits", active: false },
-  ]
-
+function SidebarContent() {
   return (
-    <aside className="w-64 border-r bg-card min-h-[calc(100vh-73px)] flex flex-col">
+    <>
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
           <SidebarLink icon={Briefcase} label="Jobs" active={true}></SidebarLink>
@@ -61,6 +54,27 @@ export function Sidebar() {
           </Button>
         </div>
       </div>
-    </aside>
+    </>
+  )
+}
+
+export function Sidebar({ open, onOpenChange }: { open?: boolean; onOpenChange?: (open: boolean) => void }) {
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:flex w-64 border-r bg-card min-h-[calc(100vh-73px)] flex-col">
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile Sidebar */}
+      <Sheet open={open} onOpenChange={onOpenChange}>
+        <SheetContent side="left" className="w-64 p-0 max-h-[90vh] overflow-y-auto">
+          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+          <aside className="w-full border-r bg-card flex flex-col">
+            <SidebarContent />
+          </aside>
+        </SheetContent>
+      </Sheet>
+    </>
   )
 }

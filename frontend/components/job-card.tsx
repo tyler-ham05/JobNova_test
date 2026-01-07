@@ -77,71 +77,71 @@ export function JobCard({ job }: { job: Job }) {
   
   return (
     <Card 
-      className="p-6 hover:shadow-lg transition-shadow min-w-[600px] cursor-pointer" 
+      className="p-4 md:p-6 hover:shadow-lg transition-shadow w-full cursor-pointer" 
       onClick={handleCardClick}
     >
-      <div className="flex gap-6">
+      <div className="flex gap-4 md:gap-6">
         <div className="flex-shrink-0">
           <CircularProgress percentage={job.matchPercentage} color={matchColor(job.matchPercentage)} />
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between mb-1 gap-4">
-            <h3 className="text-2xl font-bold min-w-0">{job.title}</h3>
-            <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-              <button className="p-2 hover:bg-muted rounded-lg transition-colors">
-                <Link2 className="h-5 w-5 text-muted-foreground" />
+          <div className="flex items-start justify-between mb-1 gap-2 md:gap-4">
+            <h3 className="text-lg md:text-2xl font-bold min-w-0 flex-1">{job.title}</h3>
+            <div className="flex items-center gap-1 md:gap-2 flex-shrink-0" onClick={(e) => e.stopPropagation()}>
+              <button className="p-1.5 md:p-2 hover:bg-muted rounded-lg transition-colors">
+                <Link2 className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground" />
               </button>
-              <button onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }} className="p-2 hover:bg-muted rounded-lg transition-colors">
-                <Heart className={`h-5 w-5 ${isLiked ? "fill-primary text-primary" : "text-muted-foreground"}`} />
+              <button onClick={(e) => { e.stopPropagation(); setIsLiked(!isLiked); }} className="p-1.5 md:p-2 hover:bg-muted rounded-lg transition-colors">
+                <Heart className={`h-4 w-4 md:h-5 md:w-5 ${isLiked ? "fill-primary text-primary" : "text-muted-foreground"}`} />
               </button>
             </div>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground mb-2">
-            <div className="w-6 h-6 bg-muted rounded flex items-center justify-center">
+            <div className="w-5 h-5 md:w-6 md:h-6 bg-muted rounded flex items-center justify-center">
               <span className="text-xs font-bold">🏢</span>
             </div>
-            <span className="font-medium">{job.company}</span>
+            <span className="font-medium text-sm md:text-base">{job.company}</span>
           </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 md:gap-4 text-xs md:text-sm text-muted-foreground flex-wrap">
             <div className="flex items-center gap-1">
-              <MapPin className="h-4 w-4" />
-              <span>{job.location}</span>
+              <MapPin className="h-3 w-3 md:h-4 md:w-4" />
+              <span className="truncate">{job.location}</span>
             </div>
             {job.onsite && (
               <>
-                <span className="w-1 h-1 rounded-full bg-muted-foreground" />
-                <span>On-site</span>
+                <span className="w-1 h-1 rounded-full bg-muted-foreground hidden sm:block" />
+                <span className="hidden sm:inline">On-site</span>
               </>
             )}
           </div>
         </div>
       </div>
-      <div className="flex items-center gap-3 flex-wrap">
-        <Badge variant="secondary" className="rounded-md bg-card !border-border">
+      <div className="flex items-center gap-2 md:gap-3 flex-wrap mt-3 md:mt-4">
+        <Badge variant="secondary" className="rounded-md bg-card !border-border text-xs">
           {job.employmentType}
         </Badge>
-        <Badge variant="secondary" className="rounded-md bg-card !border-border">
+        <Badge variant="secondary" className="rounded-md bg-card !border-border text-xs">
           {job.skillsMatch}
         </Badge>
-        <Badge variant="secondary" className="rounded-md bg-card !border-border">
+        <Badge variant="secondary" className="rounded-md bg-card !border-border text-xs">
           {job.experienceLevel}
         </Badge>
-        <Badge variant="secondary" className="rounded-md bg-card !border-border">
+        <Badge variant="secondary" className="rounded-md bg-card !border-border text-xs">
           {job.salary}
         </Badge>
       </div>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mt-4 md:mt-6">
+        <div className="flex items-center gap-2 md:gap-4 text-xs md:text-sm text-muted-foreground">
           <span>{job.postedTime}</span>
           <span>{job.applicants} applicants</span>
         </div>
 
-        <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
-          <Button variant="outline" className="rounded-full px-8 bg-transparent">
+        <div className="flex items-center gap-2 md:gap-3 w-full sm:w-auto" onClick={(e) => e.stopPropagation()}>
+          <Button variant="outline" className="rounded-full px-4 md:px-8 bg-transparent flex-1 sm:flex-none text-sm">
             Apply
           </Button>
-          <Button className="rounded-full px-6 bg-accent hover:bg-accent/90 text-accent-foreground">
+          <Button className="rounded-full px-4 md:px-6 bg-accent hover:bg-accent/90 text-accent-foreground flex-1 sm:flex-none text-sm">
             Mock Interview
           </Button>
         </div>

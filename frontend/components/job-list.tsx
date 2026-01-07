@@ -203,18 +203,19 @@ export const jobs: Job[] = [
 export function JobList() {
   return (
     <div className="">
-      <div className="flex mb-6">
-        <Button className="w-6/7 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6 text-base font-medium">
-          <RefreshCw className="mr-2 h-5 w-5" />
-          Change Job Reference
+      <div className="flex flex-col sm:flex-row gap-2 mb-4 md:mb-6">
+        <Button className="w-full sm:flex-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-4 md:py-6 text-xs sm:text-sm md:text-base font-medium">
+          <RefreshCw className="mr-2 h-4 w-4 flex-shrink-0" />
+          <span className="hidden sm:inline truncate">Change Job Reference</span>
+          <span className="sm:hidden">Change Reference</span>
         </Button>
-          <div className="flex w-1/7 items-center justify-center gap-2 text-sm text-muted-foreground bg-card hover:bg-muted/90 rounded-full mx-2 text-base font-medium">
-            <TrendingUp className="mr-2 h-5 w-5" />
+        <Button variant="outline" className="w-full sm:w-auto sm:flex-shrink-0 items-center justify-center gap-2 text-muted-foreground bg-card hover:bg-muted/90 rounded-full sm:ml-2 text-xs sm:text-sm md:text-base font-medium py-4 md:py-6 whitespace-nowrap">
+          <TrendingUp className="mr-2 h-4 w-4 flex-shrink-0" />
           <span className="font-medium">Top matched</span>
-        </div>
+        </Button>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-6">
         {jobs.map((job) => (
           <JobCard key={job.id} job={job} />
         ))}
